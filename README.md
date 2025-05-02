@@ -5,23 +5,23 @@
 
 ## Задание 1
 
-* 1.1. Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
-* 1.2. Создайте учётную запись sys_temp.
-* 1.3. Выполните запрос на получение списка пользователей в базе данных. (скриншот)
-* 1.4. Дайте все права для пользователя sys_temp.
-* 1.5. Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
-* 1.6. Переподключитесь к базе данных от имени sys_temp.  
+1.1. Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
+1.2. Создайте учётную запись sys_temp.
+1.3. Выполните запрос на получение списка пользователей в базе данных. (скриншот)
+1.4. Дайте все права для пользователя sys_temp.
+1.5. Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
+1.6. Переподключитесь к базе данных от имени sys_temp.  
 Для смены типа аутентификации с sha2 используйте запрос:  
 ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';  
-* 1.7. По ссылке https://downloads.mysql.com/docs/sakila-db.zip скачайте дамп базы данных.
-* 1.8. Восстановите дамп в базу данных.
-* 1.9. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
+1.7. По ссылке https://downloads.mysql.com/docs/sakila-db.zip скачайте дамп базы данных.
+1.8. Восстановите дамп в базу данных.
+1.9. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
 
 Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.
 
 ## Решение 1
 
-*  1.1.	Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
+1.1.	Поднимите чистый инстанс MySQL версии 8.0+. Можно использовать локальный сервер или контейнер Docker.
 ```
 sudo apt install wget lsb-release gnupg
 wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.34-1_all.deb
@@ -34,25 +34,25 @@ mysql -u root –p
 ```
 ![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-7.JPG)
 
-*  1.2.	Создайте учётную запись sys_temp.
+1.2.	Создайте учётную запись sys_temp.
 ```
 CREATE USER 'sys_temp'@'localhost' IDENTIFIED BY 'password';
 ```
 ![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-8.JPG) 
 
-* 1.3.	Выполните запрос на получение списка пользователей в базе данных. (скриншот)
+1.3.	Выполните запрос на получение списка пользователей в базе данных. (скриншот)
 ```
 SELECT user FROM mysql.user;
 ```
 ![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-9.JPG) 
 
-* 1.4.	Дайте все права для пользователя sys_temp.
+1.4.	Дайте все права для пользователя sys_temp.
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'sys_temp'@'localhost' WITH GRANT OPTION;
 ```
 ![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-10.JPG) 
 
-* 1.5.	Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
+1.5.	Выполните запрос на получение списка прав для пользователя sys_temp. (скриншот)
 ```
 SELECT * FROM information_schema.user_privileges WHERE GRANTEE="'sys_temp'@'localhost'";
 ```
@@ -135,31 +135,35 @@ SELECT * FROM information_schema.user_privileges WHERE GRANTEE="'sys_temp'@'loca
 70 rows in set (0.00 sec)
 ```
 
-* 1.6.	Переподключитесь к базе данных от имени sys_temp.
+1.6.	Переподключитесь к базе данных от имени sys_temp.
 ```
 SYSTEM mysql -u sys_temp -p
 SELECT user();
 ```
 ![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-12.JPG)
  
-* 1.7.	По ссылке https://downloads.mysql.com/docs/sakila-db.zip скачайте дамп базы данных.
+1.7.	По ссылке https://downloads.mysql.com/docs/sakila-db.zip скачайте дамп базы данных.
 ```
 wget https://downloads.mysql.com/docs/sakila-db.zip
 unzip sakila-db.zip
 ```
-* 1.8.	Восстановите дамп в базу данных.
+![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-13.JPG)
+
+1.8.	Восстановите дамп в базу данных.
 ```
 source /home/eskin/sakila-db/sakila-schema.sql
 source /home/eskin/sakila-db/sakila-data.sql
 SHOW DATABASES;
 ```
-![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-13.JPG)
+![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-14.JPG)
  
-* 1.8. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
+1.9. При работе в IDE сформируйте ER-диаграмму получившейся базы данных. При работе в командной строке используйте команду для получения всех таблиц базы данных. (скриншот)
 ```
 SHOW TABLES;
 ```
-![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-14.JPG) 
+![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-15.JPG) 
+
+![](https://github.com/eskin-igor/netology_12-2/blob/main/12-2/12-2-1-16.JPG)
  
 ## Задание 2
 
